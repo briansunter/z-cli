@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/briansunter/z-cli/compare/z-cli-v1.1.1...z-cli-v1.1.2) (2026-02-12)
+
+
+### Bug Fixes
+
+* resolve merge conflict in package.json, scope to @briansunter/z-cli ([0b0ce6c](https://github.com/briansunter/z-cli/commit/0b0ce6c568652253f31e601932b4885cef60f58a))
+* scope package name to @briansunter/z-cli and fix .npmrc creation ([575eaeb](https://github.com/briansunter/z-cli/commit/575eaebcf0eda1299f50adb16339d35ea0dc1fb6))
+
 ## [1.1.1](https://github.com/briansunter/z-cli/compare/z-cli-v1.1.0...z-cli-v1.1.1) (2026-02-12)
 
 
