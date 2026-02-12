@@ -51,8 +51,16 @@ jobs:
         run: bun run typecheck
         timeout-minutes: 3
 
+      - name: Get NPM token from Bitwarden Secrets Manager
+        id: bws
+        uses: bitwarden/sm-action@v2
+        with:
+          access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
+          secrets: |
+            ${{ secrets.BWS_NPM_TOKEN_SECRET_ID }} > NPM_TOKEN
+
       - name: Publish to npm
         run: bun publish --access public
         env:
-          BUN_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          BUN_AUTH_TOKEN: ${{ steps.bws.outputs.NPM_TOKEN }}
         timeout-minutes: 5
