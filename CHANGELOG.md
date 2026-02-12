@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/briansunter/z-cli/compare/z-cli-v1.2.0...z-cli-v1.3.0) (2026-02-12)
+
+
+### Features
+
+* add web reader tool (CLI + MCP) ([d252e3b](https://github.com/briansunter/z-cli/commit/d252e3b0660cdf20dcf0961b89dac1602d9167e5))
+
 ## [1.2.0](https://github.com/briansunter/z-cli/compare/z-cli-v1.1.3...z-cli-v1.2.0) (2026-02-12)
 
 
