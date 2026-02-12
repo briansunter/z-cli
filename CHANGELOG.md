@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.3](https://github.com/briansunter/z-cli/compare/z-cli-v1.1.2...z-cli-v1.1.3) (2026-02-12)
+
+
+### Bug Fixes
+
+* read version dynamically in MCP server, pass computed defaults in CLI ([e928c5e](https://github.com/briansunter/z-cli/commit/e928c5eca192ef2d8b5bf91d89fa151fed977443))
+* read version from package.json instead of hardcoded value ([df26a0f](https://github.com/briansunter/z-cli/commit/df26a0f92c172e03d1d9fd2370c0a82c8c64a7b3))
+
 ## [1.1.2](https://github.com/briansunter/z-cli/compare/z-cli-v1.1.1...z-cli-v1.1.2) (2026-02-12)
 
 
