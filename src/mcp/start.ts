@@ -1,7 +1,7 @@
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { createServer, type ToolSubset } from './server';
 
-const VALID_SUBSETS: ToolSubset[] = ['all', 'image', 'ocr', 'search', 'zread'];
+const VALID_SUBSETS: ToolSubset[] = ['all', 'image', 'ocr', 'web', 'search', 'reader', 'zread'];
 
 export async function startMcpServer(subset: ToolSubset = 'all'): Promise<void> {
   if (!VALID_SUBSETS.includes(subset)) {

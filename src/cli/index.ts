@@ -3,6 +3,7 @@ import { imageCommand } from './image';
 import { ocrCommand } from './ocr';
 import { zreadCommand } from './zread';
 import { webSearchCommand } from './web-search';
+import { webReaderCommand } from './web-reader';
 import { startMcpServer } from '../mcp/start';
 import type { ToolSubset } from '../mcp/server';
 import { readFileSync } from 'fs';
@@ -27,11 +28,12 @@ export function createProgram(): Command {
   program.addCommand(imageCommand);
   program.addCommand(ocrCommand);
   program.addCommand(webSearchCommand);
+  program.addCommand(webReaderCommand);
   program.addCommand(zreadCommand);
 
   program
     .command('mcp [subset]')
-    .description('Start MCP server (subsets: all, image, ocr, search, zread)')
+    .description('Start MCP server (subsets: all, image, ocr, web, search, reader, zread)')
     .action(async (subset?: string) => {
       await startMcpServer((subset || 'all') as ToolSubset);
     });

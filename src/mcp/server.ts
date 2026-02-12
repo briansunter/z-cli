@@ -13,18 +13,22 @@ import { layoutParsingToolDef } from '../tools/ocr/schema';
 import { zreadToolDefs, handleZreadTool } from '../tools/zread/proxy';
 import { webSearch, formatResults } from '../tools/web-search/api';
 import { webSearchToolDef } from '../tools/web-search/schema';
+import { readPage } from '../tools/web-reader/api';
+import { webReaderToolDef } from '../tools/web-reader/schema';
 
-export type ToolSubset = 'all' | 'image' | 'ocr' | 'search' | 'zread';
+export type ToolSubset = 'all' | 'image' | 'ocr' | 'web' | 'search' | 'reader' | 'zread';
 
 const TOOL_GROUPS: Record<ToolSubset, string[]> = {
-  all: ['generate_image', 'layout_parsing', 'web_search', 'search_doc', 'get_repo_structure', 'read_file'],
+  all: ['generate_image', 'layout_parsing', 'web_search', 'web_reader', 'search_doc', 'get_repo_structure', 'read_file'],
   image: ['generate_image'],
   ocr: ['layout_parsing'],
+  web: ['web_search', 'web_reader'],
   search: ['web_search'],
+  reader: ['web_reader'],
   zread: ['search_doc', 'get_repo_structure', 'read_file'],
 };
 
-const ALL_TOOL_DEFS = [generateImageToolDef, layoutParsingToolDef, webSearchToolDef, ...zreadToolDefs];
+const ALL_TOOL_DEFS = [generateImageToolDef, layoutParsingToolDef, webSearchToolDef, webReaderToolDef, ...zreadToolDefs];
 
 function getVersion(): string {
   try {
@@ -85,6 +89,13 @@ export function createServer(subset: ToolSubset = 'all'): Server {
           const searchResult = await webSearch(args as any);
           const text = formatResults({ id: searchResult.id, created: 0, search_result: searchResult.results });
           return { content: [{ type: 'text', text }] };
+        }
+
+        case 'web_reader': {
+          const pageResult = await readPage(args as any);
+          const header = pageResult.title ? `# ${pageResult.title}\n\n` : '';
+          const desc = pageResult.description ? `> ${pageResult.description}\n\n` : '';
+          return { content: [{ type: 'text', text: `${header}${desc}${pageResult.content}` }] };
         }
 
         case 'search_doc':
