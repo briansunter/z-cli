@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/briansunter/z-cli/compare/z-cli-v1.1.3...z-cli-v1.2.0) (2026-02-12)
+
+
+### Features
+
+* add web search tool (CLI + MCP) ([fd891df](https://github.com/briansunter/z-cli/commit/fd891dfee134e4b08e7cdddfc7f01d7db0d127ff))
+
 ## [1.1.3](https://github.com/briansunter/z-cli/compare/z-cli-v1.1.2...z-cli-v1.1.3) (2026-02-12)
 
 
