@@ -3,6 +3,9 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { generateImage } from '../tools/image/api';
 import { generateImageToolDef } from '../tools/image/schema';
 import { layoutParsing } from '../tools/ocr/api';
@@ -20,12 +23,22 @@ const TOOL_GROUPS: Record<ToolSubset, string[]> = {
 
 const ALL_TOOL_DEFS = [generateImageToolDef, layoutParsingToolDef, ...zreadToolDefs];
 
+function getVersion(): string {
+  try {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    const pkg = JSON.parse(readFileSync(join(__dirname, '../../package.json'), 'utf-8'));
+    return pkg.version;
+  } catch {
+    return '0.0.0';
+  }
+}
+
 export function createServer(subset: ToolSubset = 'all'): Server {
   const allowedTools = new Set(TOOL_GROUPS[subset]);
   const toolDefs = ALL_TOOL_DEFS.filter((t) => allowedTools.has(t.name));
 
   const server = new Server(
-    { name: 'z-ai', version: '1.0.0' },
+    { name: 'z-ai', version: getVersion() },
     { capabilities: { tools: {} } },
   );
 

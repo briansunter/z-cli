@@ -26,9 +26,9 @@ export const imageCommand = new Command('image')
 
       const result = await generateImage({
         prompt,
-        model: opts.model,
-        quality: opts.quality,
-        size: opts.size,
+        model,
+        quality,
+        size,
         outputPath: opts.output,
         filename: opts.filename,
       });

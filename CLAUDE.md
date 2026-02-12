@@ -5,9 +5,17 @@ Unified CLI for Z.AI services: image generation, OCR, and code research (zread).
 ## Running
 
 ```bash
-bun bin/z.ts <command>       # CLI mode
-bun bin/z.ts mcp             # MCP server mode (all tools)
-bun bin/z.ts mcp image       # MCP server mode (image only)
+bunx @briansunter/z-cli <command>       # CLI mode
+bunx @briansunter/z-cli mcp             # MCP server mode (all tools)
+bunx @briansunter/z-cli mcp image       # MCP server mode (image only)
+bunx @briansunter/z-cli mcp ocr         # MCP server mode (ocr only)
+bunx @briansunter/z-cli mcp zread       # MCP server mode (zread only)
+```
+
+For local development:
+
+```bash
+bun bin/z.ts <command>
 ```
 
 ## Architecture
