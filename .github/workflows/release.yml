@@ -61,10 +61,7 @@ jobs:
             ${{ secrets.BWS_NPM_TOKEN_SECRET_ID }} > NPM_TOKEN
 
       - name: Create .npmrc for publishing
-        run: |
-          cat > .npmrc << 'EOF'
-          //registry.npmjs.org/:_authToken=${NPM_TOKEN}
-          EOF
+        run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
 
       - name: Publish to npm
         run: bun publish --access public
