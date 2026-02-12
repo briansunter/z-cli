@@ -7,10 +7,8 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "outDir": "dist",
-    "rootDir": ".",
-    "declaration": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noEmit": true
   },
   "include": ["bin/**/*.ts", "src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

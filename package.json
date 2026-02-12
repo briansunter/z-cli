@@ -3,11 +3,37 @@
   "version": "1.0.0",
   "description": "Unified Z.AI CLI - image generation, OCR, and code research",
   "type": "module",
+  "license": "MIT",
+  "author": "Brian Sunter",
   "bin": {
     "z": "./bin/z.ts"
   },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/briansunter/z-cli.git"
+  },
+  "keywords": [
+    "z-ai",
+    "mcp",
+    "cli",
+    "image-generation",
+    "ocr",
+    "zread",
+    "model-context-protocol"
+  ],
   "scripts": {
-    "start": "bun bin/z.ts"
+    "start": "bun bin/z.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
@@ -16,6 +42,10 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "bun-types": "^1.0.0"
+    "bun-types": "^1.0.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
   }
 }
