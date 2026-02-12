@@ -2,6 +2,7 @@ import { Command } from 'commander';
 import { imageCommand } from './image';
 import { ocrCommand } from './ocr';
 import { zreadCommand } from './zread';
+import { webSearchCommand } from './web-search';
 import { startMcpServer } from '../mcp/start';
 import type { ToolSubset } from '../mcp/server';
 import { readFileSync } from 'fs';
@@ -20,16 +21,17 @@ function getVersion(): string {
 
 export function createProgram(): Command {
   const program = new Command('z')
-    .description('Z.AI CLI - image generation, OCR, and code research')
+    .description('Z.AI CLI - image generation, OCR, web search, and code research')
     .version(getVersion());
 
   program.addCommand(imageCommand);
   program.addCommand(ocrCommand);
+  program.addCommand(webSearchCommand);
   program.addCommand(zreadCommand);
 
   program
     .command('mcp [subset]')
-    .description('Start MCP server (subsets: all, image, ocr, zread)')
+    .description('Start MCP server (subsets: all, image, ocr, search, zread)')
     .action(async (subset?: string) => {
       await startMcpServer((subset || 'all') as ToolSubset);
     });

@@ -11,17 +11,20 @@ import { generateImageToolDef } from '../tools/image/schema';
 import { layoutParsing } from '../tools/ocr/api';
 import { layoutParsingToolDef } from '../tools/ocr/schema';
 import { zreadToolDefs, handleZreadTool } from '../tools/zread/proxy';
+import { webSearch, formatResults } from '../tools/web-search/api';
+import { webSearchToolDef } from '../tools/web-search/schema';
 
-export type ToolSubset = 'all' | 'image' | 'ocr' | 'zread';
+export type ToolSubset = 'all' | 'image' | 'ocr' | 'search' | 'zread';
 
 const TOOL_GROUPS: Record<ToolSubset, string[]> = {
-  all: ['generate_image', 'layout_parsing', 'search_doc', 'get_repo_structure', 'read_file'],
+  all: ['generate_image', 'layout_parsing', 'web_search', 'search_doc', 'get_repo_structure', 'read_file'],
   image: ['generate_image'],
   ocr: ['layout_parsing'],
+  search: ['web_search'],
   zread: ['search_doc', 'get_repo_structure', 'read_file'],
 };
 
-const ALL_TOOL_DEFS = [generateImageToolDef, layoutParsingToolDef, ...zreadToolDefs];
+const ALL_TOOL_DEFS = [generateImageToolDef, layoutParsingToolDef, webSearchToolDef, ...zreadToolDefs];
 
 function getVersion(): string {
   try {
@@ -75,6 +78,12 @@ export function createServer(subset: ToolSubset = 'all'): Server {
           const text = metadata.length > 0
             ? `---\n${metadata.join(' | ')}\n---\n\n${result.text}`
             : result.text;
+          return { content: [{ type: 'text', text }] };
+        }
+
+        case 'web_search': {
+          const searchResult = await webSearch(args as any);
+          const text = formatResults({ id: searchResult.id, created: 0, search_result: searchResult.results });
           return { content: [{ type: 'text', text }] };
         }
 
