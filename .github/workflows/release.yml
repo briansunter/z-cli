@@ -60,8 +60,14 @@ jobs:
           secrets: |
             ${{ secrets.BWS_NPM_TOKEN_SECRET_ID }} > NPM_TOKEN
 
+      - name: Create .npmrc for publishing
+        run: |
+          cat > .npmrc << 'EOF'
+          //registry.npmjs.org/:_authToken=${NPM_TOKEN}
+          EOF
+
       - name: Publish to npm
         run: bun publish --access public
         env:
-          BUN_AUTH_TOKEN: ${{ steps.bws.outputs.NPM_TOKEN }}
+          NPM_TOKEN: ${{ steps.bws.outputs.NPM_TOKEN }}
         timeout-minutes: 5
