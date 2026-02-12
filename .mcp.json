@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "z-ai": {
+      "command": "bun",
+      "args": ["${HOME}/code/z-cli/bin/z.ts", "mcp"],
+      "env": {
+        "Z_AI_API_KEY": "${Z_AI_API_KEY}"
+      }
+    }
+  }
+}
