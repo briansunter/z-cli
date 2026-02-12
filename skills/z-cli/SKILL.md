@@ -1,14 +1,14 @@
 ---
 name: z-ai-tools
-description: Use this skill for Z.AI services including generating images from text prompts, extracting text from images/PDFs (OCR), searching the web, reading/parsing web pages, or researching GitHub repositories. Activates for image generation, document OCR, web search, web reading, and code research tasks.
-keywords: [image generation, OCR, web search, web reader, code research, GitHub, zai, z-cli]
-topics: [image-generation, ocr, web-search, web-reader, code-research, zai]
+description: Use this skill for Z.AI services including generating images from text prompts, analyzing images with vision AI, extracting text from images/PDFs (OCR), searching the web, reading/parsing web pages, or researching GitHub repositories. Activates for image generation, vision analysis, document OCR, web search, web reading, and code research tasks.
+keywords: [image generation, vision, image recognition, OCR, web search, web reader, code research, GitHub, zai, z-cli]
+topics: [image-generation, vision, ocr, web-search, web-reader, code-research, zai]
 license: MIT
 ---
 
 # Z.AI Tools
 
-Unified CLI and MCP tools for image generation, OCR, web search, web reading, and GitHub code research via [`@briansunter/z-cli`](https://www.npmjs.com/package/@briansunter/z-cli).
+Unified CLI and MCP tools for image generation, vision, OCR, web search, web reading, and GitHub code research via [`@briansunter/z-cli`](https://www.npmjs.com/package/@briansunter/z-cli).
 
 ## Setup
 
@@ -48,6 +48,20 @@ Extract text, tables, and structured content from images and PDFs (OCR).
 | `model` | string | No | Model (default: `glm-ocr`) |
 
 Supports JPG, PNG (max 10MB), PDFs (max 50MB, 100 pages).
+
+### vision
+
+Analyze images using Z.AI vision model (glm-4.6v). Supports local files and URLs.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `image` | string | Yes | URL or local file path |
+| `prompt` | string | Yes | Question or instruction about the image |
+| `model` | string | No | Vision model (default: `glm-4.6v`) |
+| `thinking` | boolean | No | Enable reasoning mode |
+| `maxTokens` | number | No | Maximum tokens in response |
+
+Supports JPG, PNG, GIF, WebP, BMP. Local files are base64-encoded automatically.
 
 ### web_search
 
@@ -111,6 +125,10 @@ npx -y @briansunter/z-cli image "A sunset over mountains" --quality hd --size 15
 npx -y @briansunter/z-cli ocr ./document.pdf
 npx -y @briansunter/z-cli ocr https://example.com/image.png
 
+# Vision - analyze images
+npx -y @briansunter/z-cli vision ./photo.png "Describe this image"
+npx -y @briansunter/z-cli vision https://example.com/image.jpg "What objects are here?" --thinking
+
 # Web search
 npx -y @briansunter/z-cli search "Claude Code MCP server" --count 5
 npx -y @briansunter/z-cli search "bun runtime" --recency oneWeek
@@ -127,7 +145,7 @@ npx -y @briansunter/z-cli zread read vercel/next.js package.json
 
 ## MCP Server
 
-Single unified server exposes all 7 tools:
+Single unified server exposes all 8 tools:
 
 ```json
 {
@@ -139,4 +157,4 @@ Single unified server exposes all 7 tools:
 }
 ```
 
-Subset modes: `mcp image`, `mcp ocr`, `mcp web`, `mcp search`, `mcp reader`, `mcp zread`.
+Subset modes: `mcp image`, `mcp ocr`, `mcp vision`, `mcp web`, `mcp search`, `mcp reader`, `mcp zread`.

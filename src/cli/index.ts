@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 import { imageCommand } from './image';
 import { ocrCommand } from './ocr';
+import { visionCommand } from './vision';
 import { zreadCommand } from './zread';
 import { webSearchCommand } from './web-search';
 import { webReaderCommand } from './web-reader';
@@ -27,6 +28,7 @@ export function createProgram(): Command {
 
   program.addCommand(imageCommand);
   program.addCommand(ocrCommand);
+  program.addCommand(visionCommand);
   program.addCommand(webSearchCommand);
   program.addCommand(webReaderCommand);
   program.addCommand(zreadCommand);

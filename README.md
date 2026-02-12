@@ -1,6 +1,6 @@
 # Z.AI CLI
 
-Unified command-line interface for Z.AI services: image generation, OCR, web search, web reader, and code research.
+Unified command-line interface for Z.AI services: image generation, OCR, vision, web search, web reader, and code research.
 
 ## Install
 
@@ -22,6 +22,10 @@ bunx @briansunter/z-cli image "a sunset over mountains" --quality hd --size 1280
 bunx @briansunter/z-cli ocr ./document.pdf
 bunx @briansunter/z-cli ocr https://example.com/image.png
 
+# Vision - analyze images with AI
+bunx @briansunter/z-cli vision ./photo.png "Describe this image"
+bunx @briansunter/z-cli vision https://example.com/image.jpg "What objects are in this image?"
+
 # Web search
 bunx @briansunter/z-cli search "Claude Code MCP server"
 bunx @briansunter/z-cli search "bun runtime" --count 5 --recency oneWeek
@@ -41,9 +45,10 @@ bunx @briansunter/z-cli zread read vercel/next.js package.json
 Exposes all tools as a single MCP server for Claude Code:
 
 ```bash
-bunx @briansunter/z-cli mcp              # All 7 tools
+bunx @briansunter/z-cli mcp              # All 8 tools
 bunx @briansunter/z-cli mcp image        # generate_image only
 bunx @briansunter/z-cli mcp ocr          # layout_parsing only
+bunx @briansunter/z-cli mcp vision       # vision only
 bunx @briansunter/z-cli mcp web          # web_search + web_reader
 bunx @briansunter/z-cli mcp search       # web_search only
 bunx @briansunter/z-cli mcp reader       # web_reader only

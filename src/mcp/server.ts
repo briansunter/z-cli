@@ -15,20 +15,23 @@ import { webSearch, formatResults } from '../tools/web-search/api';
 import { webSearchToolDef } from '../tools/web-search/schema';
 import { readPage } from '../tools/web-reader/api';
 import { webReaderToolDef } from '../tools/web-reader/schema';
+import { vision } from '../tools/vision/api';
+import { visionToolDef } from '../tools/vision/schema';
 
-export type ToolSubset = 'all' | 'image' | 'ocr' | 'web' | 'search' | 'reader' | 'zread';
+export type ToolSubset = 'all' | 'image' | 'ocr' | 'vision' | 'web' | 'search' | 'reader' | 'zread';
 
 const TOOL_GROUPS: Record<ToolSubset, string[]> = {
-  all: ['generate_image', 'layout_parsing', 'web_search', 'web_reader', 'search_doc', 'get_repo_structure', 'read_file'],
+  all: ['generate_image', 'layout_parsing', 'vision', 'web_search', 'web_reader', 'search_doc', 'get_repo_structure', 'read_file'],
   image: ['generate_image'],
   ocr: ['layout_parsing'],
+  vision: ['vision'],
   web: ['web_search', 'web_reader'],
   search: ['web_search'],
   reader: ['web_reader'],
   zread: ['search_doc', 'get_repo_structure', 'read_file'],
 };
 
-const ALL_TOOL_DEFS = [generateImageToolDef, layoutParsingToolDef, webSearchToolDef, webReaderToolDef, ...zreadToolDefs];
+const ALL_TOOL_DEFS = [generateImageToolDef, layoutParsingToolDef, visionToolDef, webSearchToolDef, webReaderToolDef, ...zreadToolDefs];
 
 function getVersion(): string {
   try {
@@ -83,6 +86,15 @@ export function createServer(subset: ToolSubset = 'all'): Server {
             ? `---\n${metadata.join(' | ')}\n---\n\n${result.text}`
             : result.text;
           return { content: [{ type: 'text', text }] };
+        }
+
+        case 'vision': {
+          const visionResult = await vision(args as any);
+          const metadata: string[] = [`Model: ${visionResult.model}`];
+          if (visionResult.usage) {
+            metadata.push(`Tokens: ${visionResult.usage.total_tokens}`);
+          }
+          return { content: [{ type: 'text', text: `${metadata.join(' | ')}\n---\n\n${visionResult.text}` }] };
         }
 
         case 'web_search': {
