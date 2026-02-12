@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/briansunter/z-cli/compare/z-cli-v1.3.0...z-cli-v1.4.0) (2026-02-12)
+
+
+### Features
+
+* add vision tool for image analysis with glm-4.6v ([9e0a4c6](https://github.com/briansunter/z-cli/commit/9e0a4c6cb8dc7c984a6eb0f281a79e5c7e66f808))
+
 ## [1.3.0](https://github.com/briansunter/z-cli/compare/z-cli-v1.2.0...z-cli-v1.3.0) (2026-02-12)
 
 

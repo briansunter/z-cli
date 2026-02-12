@@ -1,6 +1,6 @@
 {
   "name": "@briansunter/z-cli",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Unified Z.AI CLI - image generation, OCR, and code research",
   "type": "module",
   "license": "MIT",
