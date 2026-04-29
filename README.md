@@ -1,6 +1,10 @@
+![Z.AI CLI: image generation, OCR, vision, web search, web reader, and code research](docs/banner.png)
+
 # Z.AI CLI
 
 Unified command-line interface for Z.AI services: image generation, OCR, vision, web search, web reader, and code research.
+
+![Z.AI CLI capabilities: six tools — image generation, OCR, vision, web search, web reader, code research (Zread) — with examples, MCP server, and Claude Code integration](docs/explainer.png)
 
 ## Install
 
