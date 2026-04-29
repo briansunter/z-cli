@@ -1,4 +1,6 @@
-![Z.AI CLI: image generation, OCR, vision, web search, web reader, and code research](docs/banner.png)
+<p align="center">
+  <img src="docs/banner.png" alt="Z.AI CLI: image generation, OCR, vision, web search, web reader, and code research" width="320">
+</p>
 
 # Z.AI CLI
 
